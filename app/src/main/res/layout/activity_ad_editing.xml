@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="adEditingActivity"
+            type="com.example.gezdir.ui.component.adEditing.AdEditingActivity" />
+
+        <variable
+            name="editTextTitleError"
+            type="String" />
+
+        <variable
+            name="editTextContentError"
+            type="String" />
+
+        <variable
+            name="editTextTimeError"
+            type="String" />
+
+        <variable
+            name="editTextPriceError"
+            type="String" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.component.adEditing.AdEditingActivity">
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@color/button_hadi_basla"
+                android:elevation="40dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="İptal Et"
+                android:textColor="@color/white"
+                app:cornerRadius="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/buttonSave"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout11" />
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@color/button_kaydol"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{() -> adEditingActivity.onUpdateClick(editTextTitle.getText().toString(), editTextContent.getText().toString(), editTextTime.getText().toString(), editTextPrice.getText().toString())}"
+                android:text="Kaydet"
+                android:textColor="@color/white"
+                app:cornerRadius="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/buttonCancel"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout10" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:error="@{editTextTimeError}"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toStartOf="@+id/textInputLayout10"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Kaç gün sürecek"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                app:error="@{editTextPriceError}"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textInputLayout11"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout9">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Fiyatı ne kadar"
+                    android:inputType="text|textShortMessage" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                app:error="@{editTextContentError}"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Gezi hakkında detaylı açıklama yapın"
+                    android:inputType="text|textLongMessage|textImeMultiLine|textMultiLine" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                app:boxBackgroundMode="outline"
+                app:error="@{editTextTitleError}"
+                app:errorEnabled="true"
+                app:helperTextEnabled="false"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonChoosePicture">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Kısa bir tanıtım içeriği oluşuturun"
+                    android:inputType="text|textLongMessage|textImeMultiLine|textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buttonChoosePicture"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/button_hadi_basla"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{() -> adEditingActivity.chooseImage()}"
+                android:text="Resim Seç"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:cornerRadius="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewSelectedPictureEd" />
+
+            <ImageView
+                android:id="@+id/imageViewSelectedPictureEd"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/en_pop_ler_3"
+                app:srcCompat="@drawable/istanbul_turist" />
+
+            <TextView
+                android:id="@+id/en_pop_ler_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/sarabun_light"
+                android:gravity="center_vertical"
+                android:text="@string/ilan_düzenle"
+                android:textAppearance="@style/en_pop_ler_"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewDelete"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="35dp"
+                android:onClick="@{() -> adEditingActivity.onRemoveClick()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/baseline_delete_24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

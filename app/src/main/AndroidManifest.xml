@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+
+    <application
+        android:name=".Gezdir"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/gezdir_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/gezdir_logo_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Gezdir"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".ui.component.loadingScreen.LoadingScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.openingScreen.OpeningScreenActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.component.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.meet.MeetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.virtualTrip.VirtualTripActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".services.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".ui.component.splash.SplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.notifications.NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.createAd.CreateAdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.chat.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.adEditing.AdEditingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.adDetail.AdDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.component.home.HomeActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

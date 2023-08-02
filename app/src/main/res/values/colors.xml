@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="button_kaydol">#10BB2C</color>
+    <color name="button_hadi_basla">#C21938</color>
+    <color name="my_light_primary">#FF000000</color>
+    <color name="my_dark_primary">#FF000000</color>
+    <color name="rectangle_color">#FFFFFF</color>
+    <color name="popup_background">#FFFFFF</color>
+    <color name="backButtonColor">#FF000000</color>
+    <color name="lineColor">#33000000</color>
+    <color name="textBackgraound">#F1EBEB</color>
+    <color name="textColor">#B3000000</color>
+    <color name="gezi_icerigi">#FFFFFF</color>
+</resources>

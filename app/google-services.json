@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "898623034701",
+    "firebase_url": "https://gezdir-27ae5-default-rtdb.firebaseio.com",
+    "project_id": "gezdir-27ae5",
+    "storage_bucket": "gezdir-27ae5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898623034701:android:7292657bb6344013d69304",
+        "android_client_info": {
+          "package_name": "com.example.gezdir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898623034701-5ja00v6ofn3cpbrmesjmpuk2iatn5cki.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwegE12iUxcCpET3Uh89821Rt_w7YQ-EA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898623034701-5ja00v6ofn3cpbrmesjmpuk2iatn5cki.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

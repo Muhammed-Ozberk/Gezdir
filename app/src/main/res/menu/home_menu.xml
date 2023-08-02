@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/messagesFragment"
+        android:icon="@drawable/baseline_message_24"
+        android:title="Mesajlar" />
+    <item
+        android:id="@+id/discoverFragment"
+        android:icon="@drawable/baseline_tour_24"
+        android:title="Keşfet" />
+    <item
+        android:id="@+id/otherFragment"
+        android:icon="@drawable/other_24"
+        android:title="Diğer" />
+</menu>

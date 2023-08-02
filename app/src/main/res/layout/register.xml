@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="registerCustom"
+            type="com.example.gezdir.ui.component.splash.register.RegisterCustomPopup" />
+
+        <variable
+            name="supportFragmentManager"
+            type="androidx.fragment.app.FragmentManager" />
+
+        <variable
+            name="loginCustomPopup"
+            type="com.example.gezdir.ui.component.splash.login.LoginCustomPopup" />
+        <variable
+            name="nameError"
+            type="String" />
+        <variable
+            name="surnameError"
+            type="String" />
+        <variable
+            name="userNameError"
+            type="String" />
+        <variable
+            name="emailError"
+            type="String" />
+        <variable
+            name="passwordError"
+            type="String" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/registerCardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/popup_background">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/closeRegister"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:onClick="@{() -> registerCustom.onCloseClick()}"
+                    android:text="@string/x"
+                    android:textAppearance="@style/x"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Profil Oluştur -->
+                <TextView
+                    android:id="@+id/profil_olu_"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="36dp"
+                    android:fontFamily="@font/sarabun_light"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/profil_olu_"
+                    android:textAppearance="@style/profil_olu_"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <!--
+                Font family: Sarabun
+                Line height: 33sp
+                -->
+
+                <!-- Gezdiren olmadan önce profilini oluşturarak Gezdir’e kayıt olmalısın. -->
+                <TextView
+                    android:id="@+id/gezdiren_olmadan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/sarabun_medium"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:paddingHorizontal="10dp"
+                    android:text="@string/gezdiren_olmadan"
+                    android:textAppearance="@style/gezdiren_olmadan"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profil_olu_" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    app:error="@{nameError}"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gezdiren_olmadan">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ad"
+                        android:inputType="textPersonName"
+                        android:theme="@style/rectangle" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    app:error="@{surnameError}"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/textInputLayout2"
+                    app:layout_constraintTop_toBottomOf="@+id/gezdiren_olmadan">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextSurname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Soyad"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
+                    app:error="@{userNameError}"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Kullanıcı Adı"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
+                    app:error="@{emailError}"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="E-posta adresi"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
+                    app:error="@{passwordError}"
+                    app:errorEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Şifre"
+                        android:inputType="textPassword"
+                        app:textInputLayoutFocusedRectEnabled="false" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--
+                Font family: Sarabun
+                Line height: 14sp
+                -->
+
+                <!-- Gezdir’e kayıt yaparak Gizlilik Sözleşmesi ve Kullanıcı Sözleşmesini kabul etmiş olursun. -->
+                <TextView
+                    android:id="@+id/gezdir_e_ka"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:paddingHorizontal="10dp"
+                    android:text="@string/gezdir_e_ka"
+                    android:textAppearance="@style/gezdir_e_ka"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+                <!--
+                Font family: Sarabun
+                Line height: 14sp
+                -->
+
+                <!-- Üye Girişi -->
+                <TextView
+                    android:id="@+id/ye_giri_i"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:onClick="@{() -> registerCustom.onLoginClick(registerCustom,loginCustomPopup,supportFragmentManager)}"
+                    android:text="@string/ye_giri_i"
+                    android:textAppearance="@style/ye_giri_i"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gezdir_e_ka" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:backgroundTint="@color/button_hadi_basla"
+                    android:elevation="40dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:onClick="@{() -> registerCustom.onCloseClick()}"
+                    android:text="Geri Dön"
+                    android:textColor="@color/white"
+                    app:cornerRadius="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonRegister"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ye_giri_i" />
+
+                <Button
+                    android:id="@+id/buttonRegister"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:backgroundTint="@color/button_kaydol"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:onClick="@{() -> registerCustom.onRegisterClick(registerCustom,loginCustomPopup,supportFragmentManager,editTextName.getText().toString(),editTextSurname.getText().toString(),editTextUserName.getText().toString(),editTextEmail.getText().toString(),editTextPassword.getText().toString())}"
+                    android:text="Kaydı Tamamla"
+                    android:textColor="@color/white"
+                    app:cornerRadius="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/button"
+                    app:layout_constraintTop_toBottomOf="@+id/ye_giri_i" />
+                <!--
+                Font family: Sarabun
+                Line height: 13sp
+                (identical to box height)
+                -->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>

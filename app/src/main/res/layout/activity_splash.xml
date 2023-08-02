@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="splashActivity"
+            type="com.example.gezdir.ui.component.splash.SplashActivity" />
+
+        <variable
+            name="letStartCustomPopup"
+            type="com.example.gezdir.ui.component.splash.letsStart.LetStartCustomPopup" />
+
+        <variable
+            name="loginCustomPopup"
+            type="com.example.gezdir.ui.component.splash.login.LoginCustomPopup" />
+
+        <variable
+            name="registerCustomPopup"
+            type="com.example.gezdir.ui.component.splash.register.RegisterCustomPopup" />
+
+        <variable
+            name="splashAdapter"
+            type="com.example.gezdir.ui.component.splash.adapter.SplashAdapter" />
+        <variable
+            name="supportFragmentManager"
+            type="androidx.fragment.app.FragmentManager" />
+    </data>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/splashConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <!-- Gezdir -->
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/gezdir"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="@font/sansita_swashed_extra_bold"
+                            android:gravity="center_horizontal|top|center_vertical"
+                            android:text="@string/gezdir"
+                            android:textAppearance="@style/gezdir"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:lineHeight="37sp" />
+
+                        <!-- Keşfet -->
+                        <TextView
+                            android:id="@+id/kesfet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="94dp"
+                            android:fontFamily="@font/sarabun_light"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/kesfet"
+                            android:textAllCaps="false"
+                            android:textAppearance="@style/kesfet"
+                            app:layout_constraintEnd_toStartOf="@+id/loginTextView"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!-- Giriş -->
+                        <TextView
+                            android:id="@+id/loginTextView"
+                            android:layout_width="57.09dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="94dp"
+                            android:fontFamily="@font/sarabun_light"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:onClick="@{() -> splashActivity.onLoginClick(loginCustomPopup,supportFragmentManager)}"
+                            android:text="@string/giris"
+                            android:textAppearance="@style/giris"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:lineHeight="23sp" />
+
+                        <TextView
+                            android:id="@+id/eglenceli_g"
+                            android:layout_width="308.15dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="30dp"
+                            android:fontFamily="@font/sarabun_light"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/eglenceli_g"
+                            android:textAppearance="@style/eglenceli_g"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/kesfet" />
+
+                        <TextView
+                            android:id="@+id/guvenilir_gezdirenler"
+                            android:layout_width="342dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="12dp"
+                            android:fontFamily="@font/sarabun_medium"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/guvenilir_gezdirenler"
+                            android:textAppearance="@style/guvenilir_gezdirenler"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/eglenceli_g" />
+
+                        <Button
+                            android:id="@+id/buttonRegister"
+                            android:layout_width="106dp"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="90dp"
+                            android:backgroundTint="@color/button_kaydol"
+                            android:fontFamily="@font/sarabun_bold"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:onClick="@{() -> splashActivity.onLetsStartClick(letStartCustomPopup,supportFragmentManager)}"
+                            android:text="@string/kaydol"
+                            android:textColor="@color/white"
+                            android:textSize="13.06sp"
+                            app:cornerRadius="0dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/loginTextView"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/buttonLetsStart"
+                            android:layout_width="99dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="19dp"
+                            android:backgroundTint="@color/button_hadi_basla"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:onClick="@{() -> splashActivity.onLetsStartClick(letStartCustomPopup,supportFragmentManager)}"
+                            android:text="@string/hadi_basla"
+                            android:textColor="@color/white"
+                            android:textSize="9.59sp"
+                            app:cornerRadius="0dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/guvenilir_gezdirenler" />
+
+                        <!-- Gezdir Gezdirenleri -->
+                        <TextView
+                            android:id="@+id/gezdir_gezdirenleri"
+                            android:layout_width="284.97dp"
+                            android:layout_height="34dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="51dp"
+                            android:fontFamily="@font/sarabun_light"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/gezdir_gezdirenleri"
+                            android:textAppearance="@style/gezdir_gezdirenleri"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/buttonLetsStart" />
+
+                        <!-- Kendi alanlarında güvenilir, özenle seçilmiş Gezdirenlerimizle tanışın. -->
+                        <TextView
+                            android:id="@+id/kendi_alanlarinda"
+                            android:layout_width="338dp"
+                            android:layout_height="17dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="7dp"
+                            android:fontFamily="@font/sarabun_medium"
+                            android:gravity="center_horizontal|center_vertical"
+                            android:text="@string/kendi_alanlarinda"
+                            android:textAppearance="@style/kendi_alanlarinda"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/gezdir_gezdirenleri" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/advertRv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:adapter="@{splashAdapter}"
+                            android:orientation="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/kendi_alanlarinda"
+                            app:spanCount="2" />
+
+                        <Button
+                            android:id="@+id/button_daha_fazlasi"
+                            style="@style/daha_fazlasi"
+                            android:layout_width="147dp"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="15dp"
+                            android:backgroundTint="#707B7F88"
+                            android:fontFamily="@font/sarabun_semi_bold"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:onClick="@{() -> splashActivity.onLoginClick(loginCustomPopup,supportFragmentManager)}"
+                            android:text="@string/daha_fazlasi"
+                            app:cornerRadius="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/advertRv" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </ScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/splash_animation_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/illu_loading" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+</layout>

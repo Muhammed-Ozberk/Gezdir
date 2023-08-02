@@ -1,0 +1,176 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Gezdir" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/my_light_primary</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+
+    </style>
+
+    <style name="gezdir">
+        <item name="android:textSize">30.58sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="kesfet">
+        <item name="android:textSize">18.03sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="giris">
+        <item name="android:textSize">18.03sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="kaydol">
+        <item name="android:textSize">13.06sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="eglenceli_g">
+        <item name="android:textSize">25.51sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="guvenilir_gezdirenler">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="hadi_basla">
+        <item name="android:textSize">9.59sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="gezdir_gezdirenleri">
+        <item name="android:textSize">21.87sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="kendi_alanlarinda">
+        <item name="android:textSize">10.35sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="istanbul">
+        <item name="android:textSize">18.33sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="den_fazla_ilan">
+        <item name="android:textSize">10.4sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="price">
+        <item name="android:textSize">14.44sp</item>
+        <item name="android:textColor">#10BB2C</item>
+    </style>
+
+    <style name="ortalama_fiyat">
+        <item name="android:textSize">8.66sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="daha_fazlasi">
+        <item name="android:textSize">13.36sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="advert_background_color">
+        <item name="android:backgroundTint">#FFFFFF</item>
+    </style>
+
+    <style name="x">
+        <item name="android:textSize">31.03sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="neye_ihtiyacin_var">
+        <item name="android:textSize">25.51sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="gezdiren_ol">
+        <item name="android:textSize">10.85sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="hizmet_satin_al">
+        <item name="android:textSize">16.05sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="beAGezdiren">
+        <item name="android:textSize">15.7sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="profil_olu_">
+        <item name="android:textSize">25.51sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="gezdir_e_ka">
+        <item name="android:textSize">10.85sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="gezdiren_olmadan">
+        <item name="android:textSize">10.85sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="ye_giri_i">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#CA3550</item>
+    </style>
+
+    <style name="uye_giri_i">
+        <item name="android:textSize">25.51sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="daha_nce_ge">
+        <item name="android:textSize">10.85sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="rectangle">
+        <item name="android:background">@drawable/rectangle_1</item>
+    </style>
+
+    <style name="hesab_n_yok">
+        <item name="android:textSize">10.85sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="merhaba_muh">
+        <item name="android:textSize">27.04sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="sana_zel_re">
+        <item name="android:textSize">16.08sp</item>
+        <item name="android:textColor">#94000000</item>
+    </style>
+
+    <style name="en_pop_ler_">
+        <item name="android:textSize">23.04sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="en_ok_terci">
+        <item name="android:textSize">20.57sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="profile_title">
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/sarabun_light</item>
+    </style>
+
+
+    <style name="Theme.Gezdir" parent="Base.Theme.Gezdir" />
+</resources>

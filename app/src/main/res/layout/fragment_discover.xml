@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="discoveriFragment"
+            type="com.example.gezdir.ui.component.home.fragment.discover.DiscoverFragment" />
+        <variable
+            name="mostPopularCitiesAdapter"
+            type="com.example.gezdir.ui.component.home.adapter.DiscoverAdapter" />
+        <variable
+            name="mostPreferredAdsAdapter"
+            type="com.example.gezdir.ui.component.home.adapter.DiscoverAdapter" />
+        <variable
+            name="helloName"
+            type="String" />
+    </data>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/discoverConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/buttonCreateAd1"
+                            android:layout_width="131dp"
+                            android:layout_height="37dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:backgroundTint="@color/button_hadi_basla"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:onClick="@{() -> discoveriFragment.goToCreateAdFragment()}"
+                            android:text="İlan Oluştur"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:visibility="gone"
+                            app:cornerRadius="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/mostPopularCitiesRv" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/mostPopularCitiesRv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="25dp"
+                            android:layout_marginTop="10dp"
+                            android:adapter="@{mostPopularCitiesAdapter}"
+                            android:orientation="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textViewMostPopularCities" />
+
+                        <TextView
+                            android:id="@+id/textViewMostPopularCities"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginHorizontal="25dp"
+                            android:layout_marginTop="25dp"
+                            android:fontFamily="@font/sarabun_light"
+                            android:gravity="center_vertical"
+                            android:text="@string/en_pop_ler_"
+                            android:textAppearance="@style/en_pop_ler_"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+                        <androidx.appcompat.widget.SearchView
+                            android:id="@+id/searchView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="25dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/search_view"
+                            app:iconifiedByDefault="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/sana_zel_re"
+                            app:queryBackground="@null"
+                            app:queryHint="Arama yap..." />
+
+                        <TextView
+                            android:id="@+id/sana_zel_re"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginHorizontal="25dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/sarabun_medium"
+                            android:gravity="center_vertical"
+                            android:text="@string/sana_zel_re"
+                            android:textAppearance="@style/sana_zel_re"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textViewHelloName" />
+
+                        <TextView
+                            android:id="@+id/textViewHelloName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginHorizontal="25dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/sarabun_light"
+                            android:gravity="center_vertical"
+                            android:text="@{helloName}"
+                            android:textAppearance="@style/merhaba_muh"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/gezdir2" />
+
+                        <ImageView
+                            android:id="@+id/imageViewBell"
+                            android:layout_width="25dp"
+                            android:layout_height="22dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginEnd="25dp"
+                            android:onClick="@{() -> discoveriFragment.onNotificationClick()}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/bell" />
+
+                        <TextView
+                            android:id="@+id/gezdir2"
+                            android:layout_width="99dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="@font/sansita_swashed_extra_bold"
+                            android:gravity="center_horizontal|top|center_vertical"
+                            android:text="@string/gezdir"
+                            android:textAppearance="@style/gezdir"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:lineHeight="37sp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </ScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/animation_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/illu_loading" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+
+
+
+</layout>
