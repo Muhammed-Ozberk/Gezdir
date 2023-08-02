@@ -13,5 +13,3 @@
 .externalNativeBuild
 .cxx
 local.properties
-apikeys
-apikeys/secrets.properties
