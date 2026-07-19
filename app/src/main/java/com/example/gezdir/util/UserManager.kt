@@ -10,7 +10,5 @@ object UserManager {
     var currentUserGezdiren: Boolean = false
     var currentUserProfileImage: String = ""
     var currentUserUID: String = ""
-    var currentUserPassword: String = ""
     var currentUserProfileUrl: String = ""
 }
-

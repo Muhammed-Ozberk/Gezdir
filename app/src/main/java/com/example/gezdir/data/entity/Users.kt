@@ -9,8 +9,6 @@ data class Users(
     var surname: String? = "",
     var username: String? = "",
     var email: String? = "",
-    var password: String? = "",
     var gezdiren: Boolean? = false,
     var profileImage: String? = "images/default.png"
 )
-

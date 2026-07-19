@@ -4,45 +4,32 @@ import android.net.Uri
 import android.util.Log
 import com.example.gezdir.data.entity.Advert
 import com.example.gezdir.data.entity.Conversation
-import com.example.gezdir.data.entity.FcmNotification
-import com.example.gezdir.data.entity.FcmNotificationData
-import com.example.gezdir.data.entity.FcmResponse
 import com.example.gezdir.data.entity.Message
 import com.example.gezdir.data.entity.MessageList
 import com.example.gezdir.data.entity.Notification
 import com.example.gezdir.data.entity.RegistrationResult
-import com.example.gezdir.data.entity.Token
 import com.example.gezdir.data.entity.Users
-import com.example.gezdir.services.FcmApiService
 import com.example.gezdir.util.UserManager
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
 class DataRepository(
-    @Named("users")
+    @param:Named("users")
     private val refUser: DatabaseReference,
-    @Named("advert")
+    @param:Named("advert")
     private val refAdvert: DatabaseReference,
     private val storageRef: StorageReference,
-    @Named("conversation")
+    @param:Named("conversation")
     private val conversationRef: CollectionReference,
-    @Named("messages")
-    private val messagesRef: CollectionReference,
-    @Named("fcmTokens")
-    private val fcmTokensRef: CollectionReference
+    @param:Named("messages")
+    private val messagesRef: CollectionReference
 ) {
 
     fun getSplashAdvertList(onComplete: (List<Advert>) -> Unit) {
@@ -62,6 +49,7 @@ class DataRepository(
                                 advertList.add(
                                     Advert(
                                         ds.key,
+                                        it.ownerId,
                                         it.username,
                                         it.title,
                                         it.content,
@@ -114,6 +102,7 @@ class DataRepository(
                                         advertList.add(
                                             Advert(
                                                 ds.key,
+                                                it.ownerId,
                                                 it.username,
                                                 it.title,
                                                 it.content,
@@ -142,6 +131,7 @@ class DataRepository(
                                     advertList.add(
                                         Advert(
                                             ds.key,
+                                            it.ownerId,
                                             it.username,
                                             it.title,
                                             it.content,
@@ -178,7 +168,7 @@ class DataRepository(
         val query = conversationRef.where(
             Filter.or(
                 Filter.equalTo("userOne", senderID),
-                Filter.greaterThanOrEqualTo("userTwo", senderID)
+                Filter.equalTo("userTwo", senderID)
             )
         )
 
@@ -324,76 +314,45 @@ class DataRepository(
         isGezdiren: Boolean,
         onComplete: (RegistrationResult) -> Unit
     ) {
-        val user = Users(
-            "",
-            name,
-            surname,
-            userName,
-            email,
-            password,
-            isGezdiren,
-        )
+        val auth = FirebaseAuth.getInstance()
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { authTask ->
+            val authUser = authTask.result?.user
+            if (!authTask.isSuccessful || authUser == null) {
+                onComplete(
+                    RegistrationResult(false, "email", authTask.exception?.localizedMessage ?: "Kayıt oluşturulamadı")
+                )
+                return@addOnCompleteListener
+            }
 
-        val queryEmail = refUser.orderByChild("email").equalTo(email)
-        val queryUsername = refUser.orderByChild("username").equalTo(userName)
-
-        queryUsername.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+            val queryUsername = refUser.orderByChild("username").equalTo(userName)
+            queryUsername.get().addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
+                    authUser.delete()
                     onComplete(RegistrationResult(false, "username", "Kullanıcı adı zaten var"))
-                } else {
-                    queryEmail.addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(snapshot: DataSnapshot) {
-                            if (snapshot.exists()) {
-                                onComplete(
-                                    RegistrationResult(
-                                        false,
-                                        "email",
-                                        "E-posta zaten var"
-                                    )
-                                )
-                            } else {
-                                refUser.push().setValue(user)
-                                    .addOnSuccessListener {
-                                        val auth = FirebaseAuth.getInstance()
-
-                                        auth.createUserWithEmailAndPassword(email, password)
-                                            .addOnCompleteListener { task ->
-                                                if (task.isSuccessful) {
-                                                    // Kullanıcı kaydı başarılı
-                                                    val user: FirebaseUser? = auth.currentUser
-                                                    // Kullanıcı verilerini kullanarak işlemler yapabilirsiniz
-                                                } else {
-                                                    // Kayıt işlemi başarısız
-                                                    // Hata mesajını elde edebilirsiniz: task.exception?.message
-                                                }
-                                            }
-
-                                        onComplete(
-                                            RegistrationResult(
-                                                true,
-                                                "",
-                                                "Kayıt başarılı"
-                                            )
-                                        )
-                                    }
-                                    .addOnFailureListener { exception ->
-                                        Log.e("register", "register: ${exception.message}")
-                                    }
-                            }
-                        }
-
-                        override fun onCancelled(error: DatabaseError) {
-                            Log.e("firebase", "Veri alınamadı", error.toException())
-                        }
-                    })
+                    return@addOnSuccessListener
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("firebase", "Veri alınamadı", error.toException())
+                val user = Users(
+                    id = authUser.uid,
+                    name = name,
+                    surname = surname,
+                    username = userName,
+                    email = email,
+                    gezdiren = isGezdiren
+                )
+                refUser.child(authUser.uid).setValue(user)
+                    .addOnSuccessListener {
+                        onComplete(RegistrationResult(true, "", "Kayıt başarılı"))
+                    }
+                    .addOnFailureListener { exception ->
+                        authUser.delete()
+                        onComplete(RegistrationResult(false, "email", exception.localizedMessage ?: "Profil kaydedilemedi"))
+                    }
+            }.addOnFailureListener { exception ->
+                authUser.delete()
+                onComplete(RegistrationResult(false, "username", exception.localizedMessage ?: "Kullanıcı adı kontrol edilemedi"))
             }
-        })
+        }
     }
 
     fun updateProfile(
@@ -432,7 +391,7 @@ class DataRepository(
                                 ) {
                                     Log.e("adSave", "imagePart: $imagePart")
                                     val imageRef =
-                                        storageRef.child("images/${System.currentTimeMillis()}.jpg")
+                                        storageRef.child("images/${FirebaseAuth.getInstance().currentUser?.uid}/${System.currentTimeMillis()}.jpg")
                                     val uploadTask = imageRef.putFile(imagePart)
 
                                     uploadTask.addOnSuccessListener { taskSnapshot ->
@@ -443,7 +402,6 @@ class DataRepository(
                                             surname = surname,
                                             username = userName,
                                             email = email,
-                                            password = UserManager.currentUserPassword,
                                             gezdiren = UserManager.currentUserGezdiren,
                                             profileImage = imagePath
                                         )
@@ -476,7 +434,6 @@ class DataRepository(
                                         surname = surname,
                                         username = userName,
                                         email = email,
-                                        password = UserManager.currentUserPassword,
                                         gezdiren = UserManager.currentUserGezdiren,
                                         profileImage = UserManager.currentUserProfileImage
                                     )
@@ -519,13 +476,15 @@ class DataRepository(
         price: String,
         imagePart: Uri
     ): Boolean {
-        val imageRef = storageRef.child("images/${System.currentTimeMillis()}.jpg")
+        val ownerId = FirebaseAuth.getInstance().currentUser?.uid ?: return false
+        val imageRef = storageRef.child("images/$ownerId/${System.currentTimeMillis()}.jpg")
         val uploadTask = imageRef.putFile(imagePart)
 
         uploadTask.addOnSuccessListener { taskSnapshot ->
             val imagePath = taskSnapshot.metadata?.path
             val advert = Advert(
                 "",
+                ownerId,
                 username,
                 title,
                 content,
@@ -556,13 +515,15 @@ class DataRepository(
         price: String,
         imagePart: Uri
     ): Boolean {
-        val imageRef = storageRef.child("images/${System.currentTimeMillis()}.jpg")
+        val ownerId = FirebaseAuth.getInstance().currentUser?.uid ?: return false
+        val imageRef = storageRef.child("images/$ownerId/${System.currentTimeMillis()}.jpg")
         val uploadTask = imageRef.putFile(imagePart)
 
         uploadTask.addOnSuccessListener { taskSnapshot ->
             val imagePath = taskSnapshot.metadata?.path
             val advert = Advert(
                 "",
+                ownerId,
                 username,
                 title,
                 content,
@@ -727,27 +688,20 @@ class DataRepository(
         val query = conversationCollection.document(message.conversationID.toString())
 
         messagesCollection.add(message).addOnSuccessListener {
-            message.receiverID?.let { it1 ->
-                message.message?.let { it2 ->
-                    sendFirebaseNotification(
-                        it1, UserManager.currentUserUsername,
-                        it2
+            if (message.receiverID != null && message.message != null) {
+                notificationCollection.add(
+                    Notification(
+                        UserManager.currentUserUsername,
+                        message.message,
+                        message.conversationID,
+                        UserManager.currentUserId,
+                        message.receiverID
                     )
-                    notificationCollection.add(
-                        Notification(
-                            UserManager.currentUserUsername,
-                            message.message,
-                            message.conversationID,
-                            UserManager.currentUserId,
-                            message.receiverID
-                        )
-                    )
-                    query.update("lastMessage", message.message)
-                }?.addOnFailureListener { exception ->
+                ).addOnFailureListener { exception ->
                     Log.e("sendMessage", "Hata: $exception")
                     exception.printStackTrace()
                 }
-
+                query.update("lastMessage", message.message)
             }
         }.addOnFailureListener { exception ->
             Log.e("sendMessage", "Hata: $exception")
@@ -778,63 +732,6 @@ class DataRepository(
             }
         }
 
-    }
-
-    private fun sendFirebaseNotification(userID: String, username: String, messageText: String) {
-
-        val query = fcmTokensRef.whereEqualTo("userID", userID)
-
-        query.get().addOnSuccessListener { snapshot ->
-            if (snapshot != null ) {
-                for (ds in snapshot.documents) {
-                    val token = ds.toObject(Token::class.java)
-                    if (token != null) {
-                        val retrofit = Retrofit.Builder()
-                            .baseUrl("https://fcm.googleapis.com")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build()
-                        val fcmApiService = retrofit.create(FcmApiService::class.java)
-
-                        val notification = FcmNotification(
-                            to = token.token.toString(),
-                            notification = FcmNotificationData(
-                                title = username,
-                                body = messageText
-                            )
-                        )
-
-                        val call = fcmApiService.sendNotification(notification = notification)
-                        call.enqueue(object : Callback<FcmResponse> {
-                            override fun onResponse(
-                                call: Call<FcmResponse>,
-                                response: Response<FcmResponse>
-                            ) {
-                                if (response.isSuccessful) {
-                                    val fcmResponse = response.body()
-                                    Log.e(
-                                        "sendFirebaseNotification",
-                                        "fcmResponse: $fcmResponse"
-                                    )
-                                    // Bildirim başarıyla gönderildi
-                                } else {
-                                    Log.e("sendFirebaseNotification", "response: $response")
-                                    // Bildirim gönderme hatası
-                                }
-                            }
-
-                            override fun onFailure(call: Call<FcmResponse>, t: Throwable) {
-                                Log.e("sendFirebaseNotification", "Hata: $t")
-                                // İstek başarısız oldu
-                            }
-                        })
-
-                    }
-                }
-            }
-        }.addOnFailureListener { exception ->
-            Log.e("sendFirebaseNotification", "Hata: $exception")
-            exception.printStackTrace()
-        }
     }
 
     fun isThereANotification(onComplete: (Boolean) -> Unit) {

@@ -28,17 +28,14 @@ class AppModule {
         @Named("conversation")
         conversationRef: CollectionReference,
         @Named("messages")
-        messagesRef: CollectionReference,
-        @Named("fcmTokens")
-        fcmTokensRef: CollectionReference
+        messagesRef: CollectionReference
     ): DataRepository {
         return DataRepository(
             refUser,
             refAdvert,
             storageRef,
             conversationRef,
-            messagesRef,
-            fcmTokensRef
+            messagesRef
         )
     }
 
@@ -74,13 +71,6 @@ class AppModule {
     @Named("messages")
     fun provideFirebaseFirestoreReferenceMessages(): CollectionReference {
          return FirebaseFirestore.getInstance().collection("messages")
-    }
-
-    @Provides
-    @Singleton
-    @Named("fcmTokens")
-    fun provideFirebaseFirestoreReferenceFcmTokens(): CollectionReference {
-         return FirebaseFirestore.getInstance().collection("fcmTokens")
     }
 
 }

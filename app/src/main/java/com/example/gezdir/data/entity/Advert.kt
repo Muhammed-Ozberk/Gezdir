@@ -5,6 +5,7 @@ import com.google.firebase.database.IgnoreExtraProperties
 @IgnoreExtraProperties
 data class Advert(
     var id: String? = "",
+    var ownerId: String? = "",
     var username: String? = "",
     var title: String? = "",
     var content: String? = "",

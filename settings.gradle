@@ -11,10 +11,10 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
+            url = uri("https://github.com/jitsi/jitsi-maven-repository/raw/master/releases")
         }
         maven {
-            url "https://maven.google.com"
+            url = uri("https://maven.google.com")
         }
     }
 }

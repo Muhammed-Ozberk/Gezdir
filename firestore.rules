@@ -1,0 +1,57 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isParticipant(data) {
+      return signedIn() && (data.userOne == request.auth.uid || data.userTwo == request.auth.uid);
+    }
+
+    function conversationData(conversationId) {
+      return get(/databases/$(database)/documents/conversation/$(conversationId)).data;
+    }
+
+    match /conversation/{conversationId} {
+      allow read: if isParticipant(resource.data);
+      allow create: if isParticipant(request.resource.data)
+        && request.resource.data.userOne != request.resource.data.userTwo;
+      allow update: if isParticipant(resource.data)
+        && request.resource.data.userOne == resource.data.userOne
+        && request.resource.data.userTwo == resource.data.userTwo
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastMessage', 'seen']);
+      allow delete: if false;
+    }
+
+    match /messages/{messageId} {
+      allow read: if isParticipant(conversationData(resource.data.conversationID));
+      allow create: if signedIn()
+        && request.resource.data.senderID == request.auth.uid
+        && isParticipant(conversationData(request.resource.data.conversationID))
+        && (request.resource.data.receiverID == conversationData(request.resource.data.conversationID).userOne
+          || request.resource.data.receiverID == conversationData(request.resource.data.conversationID).userTwo);
+      allow update, delete: if false;
+    }
+
+    match /notification/{notificationId} {
+      allow read, delete: if signedIn() && resource.data.receiverID == request.auth.uid;
+      allow create: if signedIn()
+        && request.resource.data.senderID == request.auth.uid
+        && isParticipant(conversationData(request.resource.data.conversationID))
+        && request.resource.data.receiverID != request.auth.uid
+        && (request.resource.data.receiverID == conversationData(request.resource.data.conversationID).userOne
+          || request.resource.data.receiverID == conversationData(request.resource.data.conversationID).userTwo);
+      allow update: if false;
+    }
+
+    match /fcmTokens/{uid} {
+      allow create, update: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.userID == request.auth.uid;
+      allow delete: if signedIn() && request.auth.uid == uid;
+      allow read: if false;
+    }
+  }
+}

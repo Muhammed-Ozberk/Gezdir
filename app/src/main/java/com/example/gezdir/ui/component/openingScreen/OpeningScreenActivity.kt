@@ -76,22 +76,19 @@ class OpeningScreenActivity : AppCompatActivity() {
             val user: FirebaseUser? = firebaseAuth.currentUser
             if (user != null) {
 
-                val queryEmail = refUser.orderByChild("email").equalTo(user.email)
-
-                queryEmail.addListenerForSingleValueEvent(object : ValueEventListener {
+                refUser.child(user.uid).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        val userInfo = snapshot.children.first().getValue(Users::class.java)
+                        val userInfo = snapshot.getValue(Users::class.java)
                         Log.e("authCheck", "onAuthStateChanged:signed_in:$userInfo")
 
                         userInfo?.let {
-                            UserManager.currentUserId = snapshot.children.first().key.toString()
+                            UserManager.currentUserId = user.uid
                             UserManager.currentUserName = userInfo.name.toString()
                             UserManager.currentUserSurname = userInfo.surname.toString()
                             UserManager.currentUserUsername = userInfo.username.toString()
                             UserManager.currentUserEmail = userInfo.email.toString()
                             UserManager.currentUserGezdiren = userInfo.gezdiren == true
                             UserManager.currentUserProfileImage = userInfo.profileImage.toString()
-                            UserManager.currentUserPassword = userInfo.password.toString()
                             saveToken()
                             animation.cancel()
                             startActivity(Intent(this@OpeningScreenActivity, HomeActivity::class.java))
@@ -120,32 +117,10 @@ class OpeningScreenActivity : AppCompatActivity() {
                     val token = task.result
                     // FCM token değerini kullanabilirsiniz
                     val collectionRef = FirebaseFirestore.getInstance().collection("fcmTokens")
-                    val query = collectionRef.whereEqualTo("userID", UserManager.currentUserId)
-                    query.get().addOnSuccessListener { querySnapshot ->
-                        if (querySnapshot.isEmpty) {
-
-                            val tokenObj = Token(UserManager.currentUserId, token)
-                            collectionRef.add(tokenObj)
-                                .addOnSuccessListener {
-                                    Log.e("saveToken", "Token kaydedildi")
-                                }
-                                .addOnFailureListener { exception ->
-                                    Log.e("saveToken", "Token kaydedilemedi: ${exception.message}")
-                                }
-                        } else {
-                            val docId = querySnapshot.documents[0].id
-                            collectionRef.document(docId)
-                                .update("token", token)
-                                .addOnSuccessListener {
-                                    Log.e("saveToken", "Token güncellendi")
-                                }
-                                .addOnFailureListener { exception ->
-                                    Log.e("saveToken", "Token güncellenemedi: ${exception.message}")
-                                }
-                        }
-                    }
+                    val tokenObj = Token(UserManager.currentUserId, token)
+                    collectionRef.document(UserManager.currentUserId).set(tokenObj)
                         .addOnFailureListener { exception ->
-                            Log.e("FCM", "Sorgu hatası: ${exception.message}")
+                            Log.e("saveToken", "Token kaydedilemedi: ${exception.message}")
                         }
                 } else {
                     // Token değeri alınamadı

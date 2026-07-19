@@ -1,0 +1,21 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "messages",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "conversationID", "order": "ASCENDING" },
+        { "fieldPath": "timestamp", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "notification",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "conversationID", "order": "ASCENDING" },
+        { "fieldPath": "receiverID", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

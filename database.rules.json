@@ -1,0 +1,22 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      ".read": "auth != null",
+      ".indexOn": ["username", "email"],
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.exists() && newData.hasChildren(['id', 'name', 'surname', 'username', 'email', 'gezdiren', 'profileImage']) && newData.child('id').val() === auth.uid && newData.child('email').val() === auth.token.email && !newData.hasChild('password')"
+      }
+    },
+    "advert": {
+      ".read": "auth != null",
+      ".indexOn": ["ownerId", "username"],
+      "$advertId": {
+        ".write": "auth != null && ((!data.exists() && newData.child('ownerId').val() === auth.uid) || (data.exists() && data.child('ownerId').val() === auth.uid && (!newData.exists() || newData.child('ownerId').val() === auth.uid)))",
+        ".validate": "!newData.exists() || newData.hasChildren(['ownerId', 'username', 'title', 'content', 'time', 'price', 'image'])"
+      }
+    }
+  }
+}
