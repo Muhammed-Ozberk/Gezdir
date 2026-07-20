@@ -1,5 +1,7 @@
 # Gezdir Android
 
+[![CI](https://github.com/Muhammed-Ozberk/Gezdir/actions/workflows/ci.yml/badge.svg)](https://github.com/Muhammed-Ozberk/Gezdir/actions/workflows/ci.yml)
+
 Kotlin Android travel marketplace with Firebase, real-time chat, notifications and video meetings.
 
 Gezdir connects travellers with local guides. Users can publish and browse travel adverts, manage profiles, start one-to-one conversations, receive notifications, and join virtual trips through Jitsi Meet.
